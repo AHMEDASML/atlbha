@@ -103,6 +103,7 @@ class Branch {
   final DateTime updatedAt;
   final List<Product> products;
 
+
   Branch({
     required this.id,
     required this.name,

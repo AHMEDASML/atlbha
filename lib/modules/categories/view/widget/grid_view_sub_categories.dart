@@ -1,20 +1,16 @@
+import 'package:atlobha/modules/categories/models/category_model.dart';
+import 'package:atlobha/modules/categories/view/screen/categories_screen.dart';
 import 'package:atlobha/modules/categories/view/screen/details_sub_product.dart';
 import 'package:flutter/material.dart';
 
 import '../../../../global/common/functions_app.dart';
-import '../../models/category_model.dart';
 
 class GridViewSubCategories extends StatelessWidget {
-  final List<Product>? products;
-
-  const GridViewSubCategories({Key? key, this.products}) : super(key: key);
+  final Datum? selectedDatum;
+  const GridViewSubCategories({Key? key, this.selectedDatum}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    if (products == null) {
-      return Center(child: Text("No products available"));
-    }
-
     return GridView.builder(
       physics: const NeverScrollableScrollPhysics(),
       shrinkWrap: true,
@@ -24,20 +20,21 @@ class GridViewSubCategories extends StatelessWidget {
         mainAxisSpacing: 2,
         childAspectRatio: 0.8,
       ),
-      itemCount: products!.length, // Safe to use ! since we checked for null
+      itemCount: selectedDatum?.products.length ?? 0,
       itemBuilder: (context, index) {
-        final product = products![index]; // Safe to use ! since we checked for null
+        final product = selectedDatum?.products[index];
         return GestureDetector(
           onTap: () {
             navigateTo(
                 context,
                 DetailsSubProduct(
-                  idCategory: product.id,
+                  idCategory: product!.id,
                 ));
           },
-          child: Container(
-            // Implement your product display here
-            child: Text(product.name),
+          child: ItemSubProduct(
+            key: ValueKey<int>(product?.id ?? 0),
+            // تأكد من أن id هو فريد لكل منتج
+            product: product,
           ),
         );
       },

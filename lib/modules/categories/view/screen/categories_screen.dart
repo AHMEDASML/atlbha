@@ -59,30 +59,31 @@ class _CategoriesScreenState extends State<CategoriesScreen> {
                             scrollDirection: Axis.horizontal,
                             child: Row(
                               children: con.categoryModel.value?.data.scat
-                                      .map((scatItem) => subCategories(
-                                            text: scatItem.name,
-                                            onTap: () => selectSubCategory(
-                                                scatItem.name),
-                                          ))
-                                      .toList() ??
+                                  .map((scatItem) => subCategories(
+                                text: scatItem.name,
+                                onTap: () => selectSubCategory(scatItem.name),
+                              ))
+                                  .toList() ??
                                   [],
                             ),
                           ),
-                          SingleChildScrollView(
-                            scrollDirection: Axis.horizontal,
-                            child: Row(
-                                children: selectedDatum?.branches
-                                        .map((branch) => subCategories(
-                                              text: branch.name,
-                                              onTap: () {},
-                                            ))
-                                        .toList() ??
-                                    [const Text('No branches')]),
-                          ),
+
+
+                             Row(
+                      children: selectedDatum?.branches
+                          .map((branch) => subCategories(
+                        text: branch.name,
+                        onTap: () => selectSubCategory(branch.name),
+                      ))
+                          .toList() ??
+                          [const Text('No branches')]),
+
+                          
                           const SizedBox(
                             height: 30,
                           ),
-                          GridViewSubCategories(  products: selectedDatum.products,),
+                          GridViewSubCategories(selectedDatum: selectedDatum),
+
                         ]),
                       )
                     : loadingAppWidget(),
@@ -131,7 +132,7 @@ class _CategoriesScreenState extends State<CategoriesScreen> {
         selectedSubCategory = category;
         var categoriesData = cont.categoryModel.value?.data;
         if (categoriesData != null) {
-          var selectedScat = categoriesData.scat.firstWhere(
+          selectedDatum = categoriesData.scat.firstWhere(
                 (datum) => datum.name == category,
             orElse: () => Scat(
               id: 0,
@@ -142,7 +143,6 @@ class _CategoriesScreenState extends State<CategoriesScreen> {
               branches: [],
             ),
           );
-          selectedDatum = selectedScat.branches as Scat?;
         }
       }
     });
