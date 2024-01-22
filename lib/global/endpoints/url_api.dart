@@ -1,0 +1,21 @@
+// const String BASE_URL = 'http://127.0.0.1:8000/api';
+// const String BASE_URL = 'http://10.0.2.2:8000/api';
+const String BASE_URL = 'https://syrianstore.net/api';
+const String loginUrl = '$BASE_URL/login';
+const String registerUserUrl = '$BASE_URL/register_user';
+const String registerCompanyUrl = '$BASE_URL/register_company';
+const String registerDistruedUrl = '$BASE_URL/register_distrued';
+const String addCarUrl = '$BASE_URL/add_car';
+const String myCarsUrl = '$BASE_URL/my_cars';
+const String profileUrl = '$BASE_URL/profile';
+const String homeUrl = '$BASE_URL/home';
+const String categoryUrl = '$BASE_URL/details_category/';
+const String detailsProductUrl = '$BASE_URL/details_product/';
+const String deleteCarUrl = '$BASE_URL/delete_car/';
+const String defaultCarUrl = '$BASE_URL/default_car/';
+const String listDataCarUrl = '$BASE_URL/list_data_car';
+const String requestCart = "$BASE_URL/request_cart";
+
+const String requestEstimation ="$BASE_URL/request_estimation/";
+const String requestParts ="$BASE_URL/request_parts";
+const String myRequestsUrl ="$BASE_URL/my_requests";
